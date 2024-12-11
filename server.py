@@ -40,26 +40,29 @@ def write_to_csv(data):
         csv_writer.writerow([name, email, message])
 
 def send_email_message(data):
-    name = data['name']
-    email = data['email']
-    sender_message = data['message']
+    try:
+        name = data['name']
+        email = data['email']
+        sender_message = data['message']
 
-    port = 587  # For starttls
-    smtp_server = "smtp.gmail.com"
-    sender_email = "portfo.no.reply@gmail.com"
-    receiver_email = "seth.grinstead1@gmail.com"
-    password = 'noreplypassword'
-    message = f"""
-    Name: {name}
-    Email: {email}
+        port = 587  # For starttls
+        smtp_server = "smtp.gmail.com"
+        sender_email = "portfo.no.reply@gmail.com"
+        receiver_email = "seth.grinstead1@gmail.com"
+        password = 'noreplypassword'
+        message = f"""
+        Name: {name}
+        Email: {email}
 
-    {sender_message}"""
+        {sender_message}"""
 
-    context = ssl.create_default_context()
-    with smtplib.SMTP(smtp_server, port) as server:
-        server.starttls(context=context)
-        server.login(sender_email, password)
-        server.sendmail(sender_email, receiver_email, message)
+        context = ssl.create_default_context()
+        with smtplib.SMTP(smtp_server, port) as server:
+            server.starttls(context=context)
+            server.login(sender_email, password)
+            server.sendmail(sender_email, receiver_email, message)
+    except:
+        pass
 
 @app.route('/submit_form', methods = ['POST', 'GET'])
 def submit_form():
