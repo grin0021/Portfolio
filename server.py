@@ -61,8 +61,8 @@ def send_email_message(data):
             server.starttls(context=context)
             server.login(sender_email, password)
             server.sendmail(sender_email, receiver_email, message)
-    except Exception as e:
-        return print(e)
+    except:
+        pass
 
 @app.route('/submit_form', methods = ['POST', 'GET'])
 def submit_form():
@@ -71,7 +71,7 @@ def submit_form():
             data = request.form.to_dict()
             write_to_csv(data)
             send_email_message(data)
-            # return redirect('/thankyou.html')
+            return redirect('/thankyou.html')
         except:
             return 'message send unsuccessful'
     else:
