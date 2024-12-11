@@ -48,7 +48,7 @@ def send_email_message(data):
         smtp_server = "smtp.gmail.com"
         sender_email = "portfo.no.reply@gmail.com"
         receiver_email = "seth.grinstead1@gmail.com"
-        password = 'noreplypassword'
+        password = 'icnw deph dkaz ntrm'
         message = f"""
         Name: {name}
         Email: {email}
@@ -57,11 +57,7 @@ def send_email_message(data):
 
         context = ssl.create_default_context()
         with smtplib.SMTP(smtp_server, port) as server:
-            try:
-                server.starttls(context=context)
-            except:
-                pass
-            
+            server.starttls(context=context)
             server.login(sender_email, password)
             server.sendmail(sender_email, receiver_email, message)
 
