@@ -61,7 +61,7 @@ def send_email_message(data):
             server.starttls(context=context)
             server.login(sender_email, password)
             server.sendmail(sender_email, receiver_email, message)
-    except SMTPHeloError as e:
+    except Exception as e:
         return print(e)
 
 @app.route('/submit_form', methods = ['POST', 'GET'])
