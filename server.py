@@ -40,7 +40,6 @@ def write_to_csv(data):
         csv_writer.writerow([name, email, message])
 
 def send_email_message(data):
-    try:
         name = data['name']
         email = data['email']
         sender_message = data['message']
@@ -58,11 +57,13 @@ def send_email_message(data):
 
         context = ssl.create_default_context()
         with smtplib.SMTP(smtp_server, port) as server:
-            server.starttls(context=context)
+            try:
+                server.starttls(context=context)
+            except:
+                pass
+            
             server.login(sender_email, password)
             server.sendmail(sender_email, receiver_email, message)
-    except:
-        pass
 
 @app.route('/submit_form', methods = ['POST', 'GET'])
 def submit_form():
