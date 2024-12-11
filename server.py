@@ -71,7 +71,7 @@ def submit_form():
             data = request.form.to_dict()
             write_to_csv(data)
             send_email_message(data)
-            return redirect('/thankyou.html')
+            # return redirect('/thankyou.html')
         except:
             return 'message send unsuccessful'
     else:
